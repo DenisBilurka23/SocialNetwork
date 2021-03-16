@@ -1,11 +1,29 @@
-import React from 'react'
-import classes from './Header.module.scss'
-console.log(classes)
-const Header = () => {
-    return(
-        <div className={classes.Header}>
-            <img src="https://cdn.logo.com/hotlink-ok/logo-social-sq.png" alt="logo"/>
-        </div>
-    )
+import React, {Component} from 'react'
+import Header from "./Header";
+import {connect} from "react-redux";
+import {authorizingAC} from "../../Actions/ActionCreators";
+import {authorization} from "../../api/api";
+
+class HeaderContainer extends Component {
+    componentDidMount() {
+        authorization.me().then(data => {
+            if (data.resultCode === 0)  this.props.authorizingAC(data)
+        })
+    }
+
+    render() {
+        return (
+            <Header login={this.props.login} isAuthorized={this.props.isAuthorized}/>
+        )
+    }
 }
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        isAuthorized: state.AuthReducer.isAuthorized,
+        login: state.AuthReducer.login
+    }
+}
+
+
+
+export default connect(mapStateToProps, {authorizingAC})(HeaderContainer)

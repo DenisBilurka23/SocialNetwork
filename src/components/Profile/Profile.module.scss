@@ -3,3 +3,30 @@
     width: 100%;
   }
 }
+.profileHeader{
+  img{
+    width: 100px;
+    border-radius: 15%;
+  }
+  display: flex;
+  div{
+    margin-right: 50px;
+  }
+}
+.fullName{
+  font-size: 30px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+}
+.bio{
+  div{
+    margin: 10px 0px;
+  }
+  .aboutMe{
+    font-size: 20px;
+  }
+}
+.Profile{
+  margin-bottom: 30px;
+}

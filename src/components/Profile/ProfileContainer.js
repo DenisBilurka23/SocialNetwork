@@ -1,17 +1,42 @@
-import React from 'react'
-import classes from './Profile.module.scss'
-import PostsContainer from "./Posts/PostsContainer";
+import React, {Component} from 'react'
+import {connect} from "react-redux";
+import Profile from "./Profile";
+import {onLoadProfile, setStatusAC} from "../../Actions/ActionCreators";
+import {withRouter} from "react-router";
+import {profileApi} from "../../api/api";
+import {compose} from "redux";
+import {putStatusThunkCreator} from "../../Thunk/Thunk";
 
-const Profile = (props) => {
-    return (
-        <div className="Main">
-            <div className={classes.image}><img
-                src="https://i.pinimg.com/originals/eb/f0/02/ebf002d6348c3ae432649da4418fce40.jpg" alt="img"/></div>
-            <div>Ava+description</div>
-            <PostsContainer
-                // store={props.store}
+class ProfileContainer extends Component {
+    componentDidMount() {
+        profileApi.getProfile(this.props.match.params.userID).then(response => {
+            this.props.onLoadProfile(response.data)
+        })
+        profileApi.getStatus(this.props.match.params.userID).then(response => {
+            this.props.setStatusAC(response.data)
+        })
+    }
+    render() {
+        return (
+            <Profile profile={this.props.profile}
+                     status={this.props.status}
+                     putStatus={this.props.putStatusThunkCreator}
+                     setStatus={this.props.setStatusAC}
             />
-        </div>
-    )
+        )
+    }
+
 }
-export default Profile
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.ProfileReducer.profile,
+        status: state.ProfileReducer.status
+    }
+}
+// const WithRouterProfileContainer = withRouter(ProfileContainer)
+// export default connect(mapStateToProps, {onLoadProfile})(WithRouterProfileContainer)
+export default compose(
+    connect(mapStateToProps, {onLoadProfile, setStatusAC, putStatusThunkCreator}),
+    withRouter
+)(ProfileContainer)

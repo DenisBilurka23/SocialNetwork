@@ -1,13 +1,37 @@
 import React from 'react'
-const Navigation = () => {
+import classes from'./Navigation.module.scss'
+import {NavLink} from "react-router-dom";
+import Profile from "../Profile/Profile";
+import Messeges from "../Messeges/Messeges";
+import FriendsPreview from "../Friends /FriendsPreview";
+import FriendsPreviewContainer from "../Friends /FriendsPreviewContainer";
+const Navigation = props => {
     return(
-        <div>
+        <div className={classes.Navigation}>
             <ul>
-                <li>Profile</li>
-                <li>Messeges</li>
-                <li>News</li>
-                <li>Music</li>
-                <li>Settings</li>
+                <li className={classes.active}>
+                    <NavLink to="/profile">Profile</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/messeges">Messeges</NavLink>
+                </li>
+                <li>
+                    News
+                </li>
+                <li>
+                    <NavLink to="/people">Find new people</NavLink>
+                </li>
+                <li>
+                    Music
+                </li>
+                <li>
+                    Settings
+                </li>
+                <li>
+                    <FriendsPreviewContainer
+                        // store={props.store}
+                    />
+                </li>
             </ul>
         </div>
     )

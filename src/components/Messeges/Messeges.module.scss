@@ -1,0 +1,29 @@
+.Messeges{
+  display: flex;
+  padding: 26px 0;
+  .dialogs{
+    padding: 0px 100px 0px 15px;
+    display: flex;
+    flex-direction: column;
+    a{
+      color: black;
+      padding-bottom: 5px;
+    }
+  }
+  .messeges{
+    width: 200px;
+    div{
+      padding-bottom: 5px;
+    }
+  }
+  .myMessege{
+    color: grey;
+    text-align: right;
+
+  }
+  .opponentMessege{
+    color: blue;
+    text-align: left;
+  }
+}
+

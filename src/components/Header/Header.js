@@ -1,8 +1,11 @@
 import React from 'react'
-const Header = () => {
+import classes from './Header.module.scss'
+console.log(classes)
+const Header = (props) => {
     return(
-        <div>
-            <img src="https://www.freelogodesign.org/Content/img/logo-samples/landscaping.png" alt="img"/>
+        <div className={classes.Header}>
+            <img src="https://cdn.logo.com/hotlink-ok/logo-social-sq.png" alt="logo"/>
+            {props.isAuthorized ? <div>{props.login}</div> : <div>Login</div>}
         </div>
     )
 }

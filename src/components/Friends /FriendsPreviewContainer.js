@@ -1,28 +1,10 @@
-import React from 'react'
-import {NavLink} from "react-router-dom";
-import classes from './FriendsPreview.module.scss'
+import FriendsPreview from "./FriendsPreview";
+import {connect} from "react-redux";
 
-const FriendsPreview = props => {
-    const friendsPreviewGenerator = props.friends.map((friend, index) => {
-        if (index < 3) {
-            const cls = `friendsPreviewGeneratorItem${index}`
-            return (
-                <div className={classes.cls}>
-                    <div><img src={friend.profilePic} alt="profile picture"/></div>
-                    <div>{friend.name}</div>
-                </div>
-            )
-        }
-    })
-    return (
-        <NavLink to="/friends">
-            <div className={classes.FriendsPreview}>
-                <div>FRIENDS</div>
-                <div className={classes.friendsPreviewGenerator}>
-                    {friendsPreviewGenerator}
-                </div>
-            </div>
-        </NavLink>
-    )
+const mapStateToProps = (state) => {
+    return {
+        friendsState: state.FriendsReducer
+    }
 }
-export default FriendsPreview
+const FriendsPreviewContainer = connect(mapStateToProps)(FriendsPreview)
+export default FriendsPreviewContainer

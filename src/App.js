@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss'
+import Navigation from "./components/Navigation/Navigation";
+import {Switch, Route} from 'react-router-dom'
+import FriendList from "./components/Friends /FriendList";
+import MessegesContainer from "./components/Messeges/MessegesContainer";
+import PeopleContainer from "./components/People/PeopleContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = (props) => {
+    return (
+        <div className="App">
+            <HeaderContainer/>
+            <div className="content">
+                <Navigation/>
+                <Switch>
+                    <Route path="/profile/:userID" render={() => <ProfileContainer/>}/>
+                    <Route path="/messeges" render={() => <MessegesContainer
+                        // store={props.store}
+                    />}/>
+                    <Route path="/friends" render={() => <FriendList
+                        // friends={props.state.friends}
+                    />}/>
+                    <Route path="/people" component={PeopleContainer}/>
+                    <Route path="/login" component={Login}/>
+                </Switch>
+            </div>
+        </div>
+    )
 }
 
 export default App;

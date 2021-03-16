@@ -1,7 +1,16 @@
-.Header{
+.Header {
   background: palevioletred;
   margin-bottom: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  div {
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+  }
+  img {
+    width: 50px;
+  }
 }
-.Header>img{
-  width: 50px;
-}
+
