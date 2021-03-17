@@ -1,0 +1,11 @@
+.PlaceholderFiled{
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+    span{
+        color: red;
+    }
+    input.error{
+        border: red 2px solid;
+    }
+}

@@ -3,15 +3,16 @@ import classes from './Messeges.module.scss'
 import Person from "./Person/Person"
 import Messege from "./Messege/Messege"
 import {Field, reduxForm} from "redux-form";
+import {maxLength, required} from "../../validation/validation";
+import Placeholder from "../common/Placeholder/Placeholder";
+import InputHOC from "../common/Input/Input";
 
 const Messeges = props => {
     const userGenerator = props.usersState.map((name, index) => <Person key={index} name={name} id={index}/>)
     const messegeGenerator = props.messegeState.map((messege, index) => {
-        if (messege.trim() !== '') {
-            if (index % 2 === 0) {
-                return <Messege key={index} classname={classes.myMessege} text={messege}/>
-            } else return <Messege key={index} classname={classes.opponentMessege} text={messege}/>
-        }
+        if (index % 2 === 0) {
+            return <Messege key={index} classname={classes.myMessege} text={messege}/>
+        } else return <Messege key={index} classname={classes.opponentMessege} text={messege}/>
     })
     const onSubmitHandler = (data) => {
         props.sendMessegeHandlerContainer(data.messege)
@@ -33,10 +34,11 @@ const Messeges = props => {
     )
 }
 
+const maxLength50 = maxLength(50)
 const MessegeForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name="messege" component="input" type="placeholder"/>
+            <Field validate={[required, maxLength50]} name="messege" component={Placeholder}/>
             <button>Send</button>
         </form>
     )
