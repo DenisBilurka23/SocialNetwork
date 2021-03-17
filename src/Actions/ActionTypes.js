@@ -11,4 +11,5 @@ export const loadProfile = 'loadProfile'
 export const authorizing = 'authorizing'
 export const followLoading = 'followLoading'
 export const getStatus = 'getStatus'
+export const logout = 'logout'
 

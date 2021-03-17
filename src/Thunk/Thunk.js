@@ -1,8 +1,9 @@
-import {profileApi, usersApi} from "../api/api"
+import {authorization, profileApi, usersApi} from "../api/api"
 import {
+    authorizingAC,
     FollowLoadingAC,
     followToggleActionCreator,
-    loadMoreActionCreator,
+    loadMoreActionCreator, logoutAC,
     onLoadActionCreator, setStatusAC
 } from "../Actions/ActionCreators";
 
@@ -30,6 +31,29 @@ export const putStatusThunkCreator = (status) => (dispatch) => {
     profileApi.putStatus(status).then(response => {
         if(response.data.resultCode === 0) {
             dispatch(setStatusAC(status))
+        }
+    })
+}
+export const authorizingThunkCreator = () => (dispatch) => {
+    authorization.me().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(authorizingAC(data))
+        }
+    })
+}
+export const loginThunkCreator = (email, password, login) => (dispatch) => {
+    authorization.login(email, password, login).then(response => {
+        if(response.resultCode === 0) {
+            dispatch(authorizingThunkCreator())
+        }
+    })
+}
+export const logoutThunkCreator = () => (dispatch) => {
+    authorization.logout().then(response => {
+        console.log('resultCode', response)
+        if(response.resultCode === 0) {
+
+            dispatch(logoutAC())
         }
     })
 }

@@ -1,15 +1,10 @@
-import {authorizing} from "../Actions/ActionTypes";
+import {authorizing, logout} from "../Actions/ActionTypes";
 
 const initialState = {
     id: null,
     login: null,
     email: null,
     isAuthorized: false,
-    auth: {
-        login: null,
-        password: null,
-        rememberMe: false
-    }
 }
 const AuthReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -21,7 +16,14 @@ const AuthReducer = (state = initialState, action) => {
                 isAuthorized: true
             }
         }
-        // case login
+        case logout: {
+            return {
+                ...state,
+                id: null,
+                login: null,
+                isAuthorized: false
+            }
+        }
         default: return state
     }
 }

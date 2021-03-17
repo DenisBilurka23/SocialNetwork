@@ -3,17 +3,18 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {authorizingAC} from "../../Actions/ActionCreators";
 import {authorization} from "../../api/api";
+import {authorizingThunkCreator, logoutThunkCreator} from "../../Thunk/Thunk";
 
 class HeaderContainer extends Component {
     componentDidMount() {
-        authorization.me().then(data => {
-            if (data.resultCode === 0)  this.props.authorizingAC(data)
-        })
+        this.props.authorizingThunkCreator()
     }
 
     render() {
         return (
-            <Header login={this.props.login} isAuthorized={this.props.isAuthorized}/>
+            <Header logoutThunkCreator={this.props.logoutThunkCreator}
+                    login={this.props.login}
+                    isAuthorized={this.props.isAuthorized}/>
         )
     }
 }
@@ -26,4 +27,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, {authorizingAC})(HeaderContainer)
+export default connect(mapStateToProps, {authorizingThunkCreator, logoutThunkCreator})(HeaderContainer)

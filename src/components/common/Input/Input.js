@@ -4,8 +4,8 @@ export const Input = ({input, meta}) => {
     return (
         <div className={classes.PlaceholderFiled}>
             <input {...input}
-                   type="text"
-                   id="login"
+                   type="email"
+                   id="email"
                    className={meta.touched && meta.error ? classes.error : ''}/>
             <span>{meta.touched && meta.error ? meta.error : null}</span>
         </div>

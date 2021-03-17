@@ -3,7 +3,7 @@ import {
     changeMessageValue,
     changeValue, followLoading,
     followToggle, getStatus,
-    loadMore, loadProfile, onLoad, pageChanger,
+    loadMore, loadProfile, logout, onLoad, pageChanger,
     sendMessage, totalCount,
 } from "./ActionTypes";
 
@@ -85,6 +85,11 @@ export const setStatusAC = (status) => {
     return {
         type: getStatus,
         status
+    }
+}
+export const logoutAC = () => {
+    return {
+        type: logout
     }
 }
 

@@ -4,7 +4,9 @@
   padding: 10px;
   display: flex;
   justify-content: space-between;
-  div {
+
+  a {
+    color: white;
     display: flex;
     align-items: center;
     vertical-align: center;
@@ -12,5 +14,9 @@
   img {
     width: 50px;
   }
+}
+.LogoutNav{
+  display:flex;
+  flex-direction: column;
 }
 

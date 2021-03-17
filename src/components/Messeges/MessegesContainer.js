@@ -2,6 +2,8 @@ import React from 'react'
 import {sendMessageActionCreator, changeMessageValueActionCreator} from "../../Actions/ActionCreators";
 import Messeges from "./Messeges";
 import {connect} from "react-redux";
+import {compose} from "redux";
+import {withAuthComponent} from "../../hoc/AuthHOC";
 
 
 const mapStateToProps = (state) => {
@@ -18,6 +20,7 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
-const MessegesContainer = connect(mapStateToProps, mapDispatchToProps)(Messeges)
-export default MessegesContainer
+export default compose(withAuthComponent,
+    connect(mapStateToProps, mapDispatchToProps))(Messeges)
+// const MessegesContainer = connect(mapStateToProps, mapDispatchToProps)(Messeges)
+// export default MessegesContainer
