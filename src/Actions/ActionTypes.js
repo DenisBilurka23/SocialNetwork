@@ -12,4 +12,5 @@ export const authorizing = 'authorizing'
 export const followLoading = 'followLoading'
 export const getStatus = 'getStatus'
 export const logout = 'logout'
+export const TOGGLE_INITIALIZE = 'TOGGLE_INITIALIZE'
 

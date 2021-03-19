@@ -1,6 +1,6 @@
 import React from 'react'
 import Posts from "./Posts";
-import {addPostActionCreator, changeValueActionCreator} from "../../../Actions/ActionCreators";
+import {addPostActionCreator} from "../../../Actions/ActionCreators";
 import {connect} from "react-redux";
 
 const mapStateToProps = (state) => {
@@ -13,9 +13,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addPostHandlerContainer: (data) => {
             dispatch(addPostActionCreator(data))
-        },
-        changeValueHandlerContainer: (char) => {
-            dispatch(changeValueActionCreator(char))
         }
     }
 }

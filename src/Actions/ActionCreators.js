@@ -4,7 +4,7 @@ import {
     changeValue, followLoading,
     followToggle, getStatus,
     loadMore, loadProfile, logout, onLoad, pageChanger,
-    sendMessage, totalCount,
+    sendMessage, TOGGLE_INITIALIZE, totalCount,
 } from "./ActionTypes";
 
 export const changeMessageValueActionCreator = (messege) => {
@@ -92,5 +92,8 @@ export const logoutAC = () => {
         type: logout
     }
 }
+export const initialize = () => ({
+    type: TOGGLE_INITIALIZE
+})
 
 

@@ -8,13 +8,18 @@ import {compose} from "redux";
 import {putStatusThunkCreator} from "../../Thunk/Thunk";
 
 class ProfileContainer extends Component {
+
     componentDidMount() {
-        profileApi.getProfile(this.props.match.params.userID).then(response => {
-            this.props.onLoadProfile(response.data)
-        })
-        profileApi.getStatus(this.props.match.params.userID).then(response => {
-            this.props.setStatusAC(response.data)
-        })
+        let id = this.props.match.params.userID
+        if (!id) {
+            id = this.props.authID
+            !id && this.props.history.push('/login')
+        }
+        console.log('this.props',this.props)
+        profileApi.getProfile(this.props.match.params.userID || this.props.authID)
+            .then(response => this.props.onLoadProfile(response.data))
+        profileApi.getStatus(this.props.match.params.userID || this.props.authID)
+            .then(response => this.props.setStatusAC(response.data))
     }
     render() {
         return (
@@ -31,7 +36,8 @@ class ProfileContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.ProfileReducer.profile,
-        status: state.ProfileReducer.status
+        status: state.ProfileReducer.status,
+        authID: state.AuthReducer.id
     }
 }
 // const WithRouterProfileContainer = withRouter(ProfileContainer)

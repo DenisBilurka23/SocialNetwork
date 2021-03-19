@@ -4,8 +4,9 @@ import {
     FollowLoadingAC,
     followToggleActionCreator,
     loadMoreActionCreator, logoutAC,
-    onLoadActionCreator, setStatusAC
+    onLoadActionCreator, setStatusAC, initialize
 } from "../Actions/ActionCreators";
+import {stopSubmit} from "redux-form";
 
 export const getUsersThunkCreator = (currentPage, pageSize) => (dispatch) => {
     usersApi.getUsers(currentPage, pageSize).then(data => {
@@ -35,7 +36,7 @@ export const putStatusThunkCreator = (status) => (dispatch) => {
     })
 }
 export const authorizingThunkCreator = () => (dispatch) => {
-    authorization.me().then(data => {
+    return authorization.me().then(data => {
         if (data.resultCode === 0) {
             dispatch(authorizingAC(data))
         }
@@ -45,6 +46,8 @@ export const loginThunkCreator = (email, password, login) => (dispatch) => {
     authorization.login(email, password, login).then(response => {
         if(response.resultCode === 0) {
             dispatch(authorizingThunkCreator())
+        } else {
+            dispatch(stopSubmit('login', {_error: response.messages || 'error'}))
         }
     })
 }
@@ -52,8 +55,10 @@ export const logoutThunkCreator = () => (dispatch) => {
     authorization.logout().then(response => {
         console.log('resultCode', response)
         if(response.resultCode === 0) {
-
             dispatch(logoutAC())
         }
     })
+}
+export const initializeThunkCreator = () => (dispatch) => {
+    dispatch(authorizingThunkCreator()).then(() => dispatch(initialize()))
 }
