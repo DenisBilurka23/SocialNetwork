@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 const People = (props) => {
     const userGenerator = props.users.map((user) => {
         return (
-            <div className={classes.People}>
+            <div className={classes.People} key={`user + ${Math.random()}`}>
                 <NavLink to={'profile/' + user.id}>
                     <div>
                         <img src={user.photos.small || props.defaultProfilePicture} alt="Profile picture"/>
@@ -35,6 +35,7 @@ const People = (props) => {
         pages.push(<span
             className={`${classes.page} ${i === props.currentPage ? classes.current : null}`}
             onClick={() => props.pageChangeItemsHandler(i)}
+            key={i}
         >
                 {i}</span>)
     }

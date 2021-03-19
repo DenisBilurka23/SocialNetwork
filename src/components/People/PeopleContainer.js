@@ -9,6 +9,13 @@ import {connect} from "react-redux"
 import {getUsersThunkCreator, onFollowThunkCreator, onUnfollowThunkCreator} from "../../Thunk/Thunk";
 import {withAuthComponent} from "../../hoc/AuthHOC";
 import {compose} from "redux";
+import {
+    getAllUsers,
+    getCurrentPage,
+    getDefaultProfilePicture, getIsAuthorizedInfo, getIsFollowLoadedInfo, getIsLoadedInfo,
+    getPageSize,
+    getUsers
+} from "../../Redux/Selectors/Selectors";
 
 class PeopleContainer extends React.Component {
     componentDidMount() {
@@ -42,15 +49,14 @@ class PeopleContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        defaultProfilePicture: state.PeopleReducer.defaultProfilePicture,
-        users: state.PeopleReducer.users,
-        currentPage: state.PeopleReducer.currentPage,
-        allUsers: state.PeopleReducer.allUsers,
-        pageNumbers: state.PeopleReducer.allUsers / state.PeopleReducer.pageSize,
-        pageSize: state.PeopleReducer.pageSize,
-        isLoaded: state.PeopleReducer.isLoaded,
-        isFollowLoaded: state.PeopleReducer.isFollowLoaded,
-        isAuthorized: state.AuthReducer.isAuthorized
+        defaultProfilePicture: getDefaultProfilePicture(state),
+        users: getUsers(state),
+        currentPage: getCurrentPage(state),
+        allUsers: getAllUsers(state),
+        pageSize: getPageSize(state),
+        isLoaded: getIsLoadedInfo(state),
+        isFollowLoaded: getIsFollowLoadedInfo(state),
+        isAuthorized: getIsAuthorizedInfo(state)
     }
 }
 
