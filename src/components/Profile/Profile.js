@@ -3,6 +3,7 @@ import classes from './Profile.module.scss'
 import PostsContainer from "./Posts/PostsContainer";
 import Preloader from "../common/preloader/preloader";
 import Status from "./Status";
+import StatusHooks from "./StatusHooks";
 
 const Profile = (props) => {
     if (props.profile) {
@@ -32,7 +33,7 @@ const Profile = (props) => {
                         </div>
                     </div>
                     <div className={classes.bio}>
-                        <Status setStatus={props.setStatus} putStatus={props.putStatus} status={props.status}/>
+                        <StatusHooks setStatus={props.setStatus} putStatus={props.putStatus} status={props.status}/>
                         <div className={classes.aboutMe}>{props.profile.aboutMe ? props.profile.aboutMe : null}</div>
                         {renderContacts}
                     </div>
