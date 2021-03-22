@@ -30,19 +30,15 @@ const People = (props) => {
             </div>
         )
     })
-    let pages = []
-    for (let i = 1; i <= 5; i++) {
-        pages.push(<span
-            className={`${classes.page} ${i === props.currentPage ? classes.current : null}`}
-            onClick={() => props.pageChangeItemsHandler(i)}
-            key={i}
-        >
-                {i}</span>)
-    }
+
     return (
         <div>
-            {props.isLoaded ? <div className={classes.pages}>{pages}</div> : null}
-            {props.isLoaded ? userGenerator : <Preloader/>}
+            {userGenerator}
+            {props.isLoaded ?
+                <button
+                    onClick={props.loadMoreHandler}
+                    className={classes.loadMore}
+                >load more</button> : <Preloader/>}
         </div>
     )
 }

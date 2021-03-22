@@ -23,16 +23,16 @@ class PeopleContainer extends React.Component {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
-    pageChangeItemsHandler = (page) => {
+    loadMoreHandler = () => {
+        console.log(this.props.currentPage)
         this.props.onLoadHandler(false)
-        this.props.getUsers(page, this.props.pageSize)
-        this.props.pageChangerHandler(page)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     render() {
         return (
             <People
-                pageChangeItemsHandler={this.pageChangeItemsHandler}
+                loadMoreHandler={this.loadMoreHandler}
                 currentPage={this.props.currentPage}
                 defaultProfilePicture={this.props.defaultProfilePicture}
                 users={this.props.users}

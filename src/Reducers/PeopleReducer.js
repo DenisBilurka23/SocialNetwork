@@ -30,7 +30,8 @@ const PeopleReducer = (state = initialState, action) => {
         case loadMore: {
             return {
                 ...state,
-                users:[...action.users]
+                currentPage: state.currentPage + 1,
+                users:[...state.users, ...action.users]
             }
         }
         case totalCount: {

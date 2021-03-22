@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 const StatusHooks = (props) => {
 
@@ -15,6 +15,7 @@ const StatusHooks = (props) => {
         activeToggle()
         props.putStatus(status)
     }
+    useEffect(() => setStatus(props.status), [props.status])
     return (
         <div>
             {!active ?

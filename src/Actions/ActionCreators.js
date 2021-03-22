@@ -1,7 +1,7 @@
 import {
     addPost, authorizing,
     changeMessageValue,
-    changeValue, followLoading,
+    changeValue, DELETE_POST, followLoading,
     followToggle, getStatus,
     loadMore, loadProfile, logout, onLoad, pageChanger,
     sendMessage, TOGGLE_INITIALIZE, totalCount,
@@ -94,6 +94,10 @@ export const logoutAC = () => {
 }
 export const initialize = () => ({
     type: TOGGLE_INITIALIZE
+})
+export const DeletePostAC = (id) => ({
+    type: DELETE_POST,
+    id
 })
 
 
