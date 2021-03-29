@@ -1,4 +1,4 @@
-import {getStatus, loadProfile} from "../Actions/ActionTypes";
+import {getStatus, loadProfile, UPDATE_PHOTO} from "../Actions/ActionTypes";
 
 const initialState = {
     profile: null,
@@ -16,6 +16,12 @@ const ProfileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.status
+            }
+        }
+        case UPDATE_PHOTO: {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
             }
         }
         default: return state

@@ -4,7 +4,7 @@ import {
     changeValue, DELETE_POST, followLoading,
     followToggle, getStatus,
     loadMore, loadProfile, logout, onLoad, pageChanger,
-    sendMessage, TOGGLE_INITIALIZE, totalCount,
+    sendMessage, TOGGLE_INITIALIZE, totalCount, UPDATE_PHOTO,
 } from "./ActionTypes";
 
 export const changeMessageValueActionCreator = (messege) => {
@@ -98,6 +98,10 @@ export const initialize = () => ({
 export const DeletePostAC = (id) => ({
     type: DELETE_POST,
     id
+})
+export const updatePhotoAC = (photos) => ({
+    type: UPDATE_PHOTO,
+    photos
 })
 
 

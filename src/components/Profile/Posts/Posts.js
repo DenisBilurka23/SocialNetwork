@@ -6,7 +6,7 @@ import {Field, reduxForm} from "redux-form";
 const Posts = props => {
     const postsGenerator = props.postsState.map(post => <Post
         key={'post' + Math.random()}
-        profilePic={post.profilePic}
+        profilePic={props.profilePic.small || post.profilePic}
         text={post.text}
         likes={post.likeCounter}
         />)

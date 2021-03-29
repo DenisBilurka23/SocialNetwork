@@ -4,7 +4,7 @@ import {
     FollowLoadingAC,
     followToggleActionCreator,
     loadMoreActionCreator, logoutAC,
-    onLoadActionCreator, setStatusAC, initialize
+    onLoadActionCreator, setStatusAC, initialize, updatePhotoAC, onLoadProfile
 } from "../Actions/ActionCreators";
 import {stopSubmit} from "redux-form";
 
@@ -53,4 +53,22 @@ export const logoutThunkCreator = () => async (dispatch) => {
 }
 export const initializeThunkCreator = () => (dispatch) => {
     dispatch(authorizingThunkCreator()).then(() => dispatch(initialize()))
+}
+export const updatePhotoThunkCreator = (file) => async (dispatch) => {
+    const response = await profileApi.uploadPictureApi(file)
+    if(response.data.resultCode === 0) {
+        dispatch(updatePhotoAC(response.data.data.photos))
+    }
+}
+export const sendFormThunkCreator = (data) => async (dispatch, getState) => {
+    const response = await profileApi.updateProfile(data)
+    if(response.data.resultCode === 0) {
+        profileApi.getProfile(getState().AuthReducer.id)
+            .then(response => dispatch(onLoadProfile(response.data)))
+        profileApi.getStatus(getState().AuthReducer.id)
+            .then(response => dispatch(setStatusAC(response.data)))
+    } else {
+        dispatch(stopSubmit('ProfileForm', {_error: response.data.messages[0] || 'error'}))
+        return Promise.reject()
+    }
 }

@@ -6,7 +6,8 @@ import {connect} from "react-redux";
 const mapStateToProps = (state) => {
     return {
         postsState: state.PostReducer.posts,
-        inputValueContainer: state.PostReducer.inputValue
+        inputValueContainer: state.PostReducer.inputValue,
+        profilePic: state.ProfileReducer.profile.photos
     }
 }
 const mapDispatchToProps = (dispatch) => {

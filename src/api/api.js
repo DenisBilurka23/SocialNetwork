@@ -36,6 +36,12 @@ export const authorization = {
 export const profileApi = {
     getProfile: (userID) => instance.get(`profile/${userID}`),
     getStatus: (userID) => instance.get(`profile/status/${userID}`),
-    putStatus: (status) => instance.put('profile/status', {status})
+    putStatus: (status) => instance.put('profile/status', {status}),
+    uploadPictureApi: (file) => {
+        const formData = new FormData();
+        formData.append("image", file);
+        return instance.put('/profile/photo', formData)
+    },
+    updateProfile: (profile) => instance.put('/profile', profile)
 }
 

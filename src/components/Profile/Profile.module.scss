@@ -30,3 +30,22 @@
 .Profile{
   margin-bottom: 30px;
 }
+.ProfileForm{
+  margin-bottom: 50px;
+  font-weight: 800;
+  div{
+    margin-bottom: 10px
+  }
+  .input{
+    float: right;
+    &:before{
+      clear: both;
+      content: '';
+      display: block;
+    }
+  }
+  .errorMessege{
+    color:red;
+    font-weight: 800;
+  }
+}
