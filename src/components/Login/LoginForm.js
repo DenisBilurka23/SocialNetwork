@@ -22,6 +22,12 @@ const LoginForm = (props) => {
                     <label htmlFor="checkbox">Remember me</label>
                     <Field name="rememberMe" id="checkbox" value="Remember me" type="checkbox" component="input"/>
                 </div>
+                {props.captchaUrl &&
+                <div>
+                    <img src={props.captchaUrl.url} alt="captcha"/>
+                    <div><Field name="captcha" component="input" type="text"/></div>
+                </div>}
+
                 <button>Log in</button>
             </form>
 

@@ -18,7 +18,7 @@ const Profile = (props) => {
         const contactKeys = props.profile.contacts && Object.keys(props.profile.contacts)
         const renderContacts = props.profile.contacts && contactKeys.map(item => {
                 return (
-                    props.profile.contacts[item] ? <div>
+                    props.profile.contacts[item] ? <div key={item}>
                         {`${item}: ${props.profile.contacts[item]}`}
                     </div> : null
                 )

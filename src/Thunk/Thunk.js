@@ -1,10 +1,10 @@
-import {authorization, profileApi, usersApi} from "../api/api"
+import {authorization, profileApi, securityApi, usersApi} from "../api/api"
 import {
     authorizingAC,
     FollowLoadingAC,
     followToggleActionCreator,
     loadMoreActionCreator, logoutAC,
-    onLoadActionCreator, setStatusAC, initialize, updatePhotoAC, onLoadProfile
+    onLoadActionCreator, setStatusAC, initialize, updatePhotoAC, onLoadProfile, captchaAC
 } from "../Actions/ActionCreators";
 import {stopSubmit} from "redux-form";
 
@@ -36,12 +36,19 @@ export const authorizingThunkCreator = () => (dispatch) => {
         }
     })
 }
-export const loginThunkCreator = (email, password, login) => async (dispatch) => {
-    const response = await authorization.login(email, password, login)
-    if (response.resultCode === 0) {
-        dispatch(authorizingThunkCreator())
-    } else {
-        dispatch(stopSubmit('login', {_error: response.messages || 'error'}))
+export const loginThunkCreator = (email, password, login, captcha) => async (dispatch) => {
+    try {
+        const response = await authorization.login(email, password, login, captcha)
+        if (response.resultCode === 0) {
+            dispatch(authorizingThunkCreator())
+        } else {
+            if (response.resultCode === 10) {
+                dispatch(captchaThunkCreator())
+            }
+            dispatch(stopSubmit('login', {_error: response.messages || 'error'}))
+        }
+    } catch (e) {
+        console.log(e)
     }
 }
 
@@ -71,4 +78,8 @@ export const sendFormThunkCreator = (data) => async (dispatch, getState) => {
         dispatch(stopSubmit('ProfileForm', {_error: response.data.messages[0] || 'error'}))
         return Promise.reject()
     }
+}
+const captchaThunkCreator = () => async (dispatch) => {
+    const response = await securityApi.getCaptcha()
+    dispatch(captchaAC(response.data))
 }

@@ -24,8 +24,8 @@ export const authorization = {
     me() {
         return instance.get('auth/me').then(response => response.data)
     },
-    login(email, password, rememberMe) {
-        return instance.post('/auth/login', {email, password, rememberMe})
+    login(email, password, rememberMe, captcha) {
+        return instance.post('/auth/login', {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
     logout() {
@@ -43,5 +43,8 @@ export const profileApi = {
         return instance.put('/profile/photo', formData)
     },
     updateProfile: (profile) => instance.put('/profile', profile)
+}
+export const securityApi = {
+    getCaptcha: () => instance.get('/security/get-captcha-url')
 }
 

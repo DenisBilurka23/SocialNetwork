@@ -1,5 +1,5 @@
 import {
-    addPost, authorizing,
+    addPost, authorizing, captcha,
     changeMessageValue,
     changeValue, DELETE_POST, followLoading,
     followToggle, getStatus,
@@ -102,6 +102,10 @@ export const DeletePostAC = (id) => ({
 export const updatePhotoAC = (photos) => ({
     type: UPDATE_PHOTO,
     photos
+})
+export const captchaAC = (captchaUrl) => ({
+    type: captcha,
+    captchaUrl
 })
 
 

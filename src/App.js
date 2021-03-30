@@ -1,6 +1,6 @@
 import './App.scss'
 import Navigation from "./components/Navigation/Navigation";
-import {Switch, Route, withRouter} from 'react-router-dom'
+import {Switch, Route, withRouter, Redirect} from 'react-router-dom'
 import FriendList from "./components/Friends /FriendList";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -28,6 +28,7 @@ class App extends Component {
                     {!this.props.initialized ? <Preloader/> :
                         <Switch>
                             <Suspense fallback={<Preloader/>}>
+                                <Route path="/" render={() => <Redirect to="/profile"/>}/>
                                 <Route path="/profile/:userID?" render={() => <ProfileContainer/>}/>
                                 <Route path="/messeges" render={() => <MessegesContainer
                                     // store={props.store}
