@@ -9,7 +9,7 @@ import './index.css'
 
 const Render = () => {
     const app = (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <App
                     // store={store}

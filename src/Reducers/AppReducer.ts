@@ -3,7 +3,8 @@ import {TOGGLE_INITIALIZE} from "../Actions/ActionTypes";
 const initialState = {
     initialized: false
 }
-const AppReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+const AppReducer = (state = initialState, action: any): initialStateType => {
     switch (action.type) {
         case TOGGLE_INITIALIZE:{
             return {

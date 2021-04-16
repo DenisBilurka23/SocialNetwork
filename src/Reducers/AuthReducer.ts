@@ -1,14 +1,15 @@
 import {authorizing, captcha, logout} from "../Actions/ActionTypes";
 
 const initialState = {
-    id: null,
-    login: null,
-    email: null,
-    captcha: null,
-    captchaUrl: null,
-    isAuthorized: false,
+    id: null as null | number,
+    login: null as null | string,
+    email: null as null | string,
+    captcha: null as null | string,
+    captchaUrl: null as null | string,
+    isAuthorized: false as boolean
 }
-const AuthReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+const AuthReducer = (state = initialState, action: any): initialStateType => {
     switch (action.type) {
         case authorizing: {
             return {

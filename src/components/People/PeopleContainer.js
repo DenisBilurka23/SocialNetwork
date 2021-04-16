@@ -21,16 +21,26 @@ class PeopleContainer extends React.Component {
     componentDidMount() {
         this.props.onLoadHandler(false)
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        window.addEventListener('scroll', this.onScroll)
     }
 
     loadMoreHandler = () => {
-        console.log(this.props.currentPage)
         this.props.onLoadHandler(false)
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
+    onScroll = () => {
+        const windowHeight = window.innerHeight
+        const currentScroll = window.pageYOffset
+        const fullHeight = document.body.offsetHeight
+        if (windowHeight + currentScroll >= fullHeight && this.props.isLoaded) {
+            this.loadMoreHandler()
+        }
+    }
+
 
     render() {
         return (
+
             <People
                 loadMoreHandler={this.loadMoreHandler}
                 currentPage={this.props.currentPage}
@@ -43,6 +53,7 @@ class PeopleContainer extends React.Component {
                 onFollow={this.props.onFollow}
                 onUnfollow={this.props.onUnfollow}
             />
+
         )
     }
 }

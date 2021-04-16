@@ -6,25 +6,28 @@ import {
     pageChanger,
     totalCount
 } from "../Actions/ActionTypes"
+import {photosType, usersType} from "../Types/Types";
 
 const initialState = {
-    users: [],
+    users: [] as Array<usersType>,
     currentPage: 1,
-    pageSize: 5,
+    pageSize: 6,
     allUsers: 0,
     isLoaded: false,
     isFollowLoaded: true,
     defaultProfilePicture: 'https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg'
 }
-const PeopleReducer = (state = initialState, action) => {
+
+type initialStateType = typeof initialState
+const PeopleReducer = (state = initialState, action: any): initialStateType => {
     switch (action.type) {
         case followToggle: {
             return {
                 ...state,
-                users: state.users.map((user, id) => {
+                users: state.users.map((user: any, id) => {
                     if (user.id === action.id) return {...user, followed:!user.followed}
                     else return {...user}
-                } )
+                } ),
             }
         }
         case loadMore: {

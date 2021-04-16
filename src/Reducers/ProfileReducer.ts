@@ -1,10 +1,14 @@
 import {getStatus, loadProfile, UPDATE_PHOTO} from "../Actions/ActionTypes";
+import {profileType} from "../Types/Types";
 
 const initialState = {
-    profile: null,
-    status: ''
+    profile: null as profileType | null,
+    status: '' as string
 }
-const ProfileReducer = (state = initialState, action) => {
+
+type initialStateType = typeof initialState
+
+const ProfileReducer = (state = initialState, action: any): initialStateType => {
     switch (action.type) {
         case loadProfile: {
             return {
@@ -21,7 +25,7 @@ const ProfileReducer = (state = initialState, action) => {
         case UPDATE_PHOTO: {
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: {...state.profile, photos: action.photos} as profileType
             }
         }
         default: return state

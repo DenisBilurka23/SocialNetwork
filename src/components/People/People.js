@@ -34,11 +34,7 @@ const People = (props) => {
     return (
         <div>
             {userGenerator}
-            {props.isLoaded ?
-                <button
-                    onClick={props.loadMoreHandler}
-                    className={classes.loadMore}
-                >load more</button> : <Preloader/>}
+            {!props.isLoaded && <Preloader/>}
         </div>
     )
 }
