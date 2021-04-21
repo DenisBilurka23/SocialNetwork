@@ -1,9 +1,20 @@
-import React from 'react'
+import React, {FC} from 'react'
 import classes from './People.module.scss'
 import Preloader from "../common/preloader/preloader";
 import {NavLink} from "react-router-dom";
+import {usersType} from "../../Types/Types";
 
-const People = (props) => {
+type propsType = {
+    users: Array<usersType>
+    defaultProfilePicture: string
+    isFollowLoaded: boolean
+    followLoading: (isLoading: boolean) => void
+    onUnfollow: (id: number) => void
+    onFollow: (id: number) => void
+    isLoaded: boolean
+}
+
+const People:FC<propsType> = (props) => {
     const userGenerator = props.users.map((user) => {
         return (
             <div className={classes.People} key={`user + ${Math.random()}`}>

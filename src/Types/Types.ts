@@ -3,10 +3,11 @@ export type photosType = {
     large: string | null
 }
 export type usersType = {
-    id: string
+    id: number
     name: string
     status: string | null
     photos: photosType
+    followed: boolean
 }
 export type profileType = {
     userId: number

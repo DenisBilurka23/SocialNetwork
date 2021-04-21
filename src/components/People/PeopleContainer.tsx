@@ -16,8 +16,28 @@ import {
     getPageSize,
     getUsers
 } from "../../Redux/Selectors/Selectors";
+import {stateType} from "../../Redux/ReduxStore";
+import {usersType} from "../../Types/Types";
 
-class PeopleContainer extends React.Component {
+type PeopleContainerType = mapStateType & mapDispatchType
+type mapStateType = {
+    currentPage: number
+    pageSize: number
+    isLoaded: boolean
+    defaultProfilePicture: string
+    users: Array<usersType>
+    isFollowLoaded: boolean
+    isAuthorized: any
+}
+type mapDispatchType = {
+    onLoadHandler: (isLoaded: boolean) => any
+    onFollow: (id: number) => void
+    onUnfollow: (id: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+    followLoading: (isFollowLoaded: boolean) => void
+}
+
+class PeopleContainer extends React.Component<PeopleContainerType> {
     componentDidMount() {
         this.props.onLoadHandler(false)
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -26,7 +46,8 @@ class PeopleContainer extends React.Component {
 
     loadMoreHandler = () => {
         this.props.onLoadHandler(false)
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
     onScroll = () => {
         const windowHeight = window.innerHeight
@@ -40,13 +61,9 @@ class PeopleContainer extends React.Component {
 
     render() {
         return (
-
             <People
-                loadMoreHandler={this.loadMoreHandler}
-                currentPage={this.props.currentPage}
                 defaultProfilePicture={this.props.defaultProfilePicture}
                 users={this.props.users}
-                FollowHandler={this.props.FollowHandler}
                 isLoaded={this.props.isLoaded}
                 followLoading={this.props.followLoading}
                 isFollowLoaded={this.props.isFollowLoaded}
@@ -58,12 +75,11 @@ class PeopleContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: stateType): mapStateType => {
     return {
         defaultProfilePicture: getDefaultProfilePicture(state),
         users: getUsers(state),
         currentPage: getCurrentPage(state),
-        allUsers: getAllUsers(state),
         pageSize: getPageSize(state),
         isLoaded: getIsLoadedInfo(state),
         isFollowLoaded: getIsFollowLoadedInfo(state),
@@ -71,30 +87,21 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
-        FollowHandler: (id) => {
-            dispatch(followToggleActionCreator(id))
-        },
-        setUserNumberHandler: (users) => {
-            dispatch(totalCountActionCreator(users))
-        },
-        pageChangerHandler: (page) => {
-            dispatch(pageChangerActionCreator(page))
-        },
-        onLoadHandler: (isLoaded) => {
+        onLoadHandler: (isLoaded:boolean) => {
             dispatch(onLoadActionCreator(isLoaded))
         },
-        followLoading: (isFollowLoaded) => {
+        followLoading: (isFollowLoaded:boolean) => {
             dispatch(FollowLoadingAC(isFollowLoaded))
         },
-        getUsers: (currentPage, pageSize) => {
+        getUsers: (currentPage:number, pageSize:number) => {
             dispatch(getUsersThunkCreator(currentPage, pageSize))
         },
-        onFollow: (id) => {
+        onFollow: (id:number) => {
             dispatch(onFollowThunkCreator(id))
         },
-        onUnfollow: (id) => {
+        onUnfollow: (id:number) => {
             dispatch(onUnfollowThunkCreator(id))
         }
     }
