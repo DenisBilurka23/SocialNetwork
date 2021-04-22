@@ -1,4 +1,5 @@
 import {addPost, changeValue, DELETE_POST} from '../Actions/ActionTypes'
+import {ActionCreatorsTypes} from "../Actions/ActionCreators";
 
 const initialState = {
     inputValue: 'default state' as string,
@@ -25,7 +26,7 @@ type postsType = {
     profilePic: string
 }
 type initialStateType = typeof initialState
-const postPageReducer = (state = initialState, action: any): initialStateType => {
+const postPageReducer = (state = initialState, action: ActionCreatorsTypes): initialStateType => {
     switch (action.type) {
         case addPost:
             return {

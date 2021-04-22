@@ -1,3 +1,5 @@
+import {ActionCreatorsTypes} from "../Actions/ActionCreators";
+
 const initialState:Array<FriendsType> = [
     {
         name: 'Arthur',
@@ -26,7 +28,7 @@ type FriendsType = {
     profilePic: string
 }
 type initialStateType = typeof initialState
-const FriendsReducer = (state = initialState, action: any): initialStateType => {
+const FriendsReducer = (state = initialState, action: ActionCreatorsTypes): initialStateType => {
     return state
 }
 export default FriendsReducer

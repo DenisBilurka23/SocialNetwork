@@ -7,6 +7,7 @@ import {
     totalCount
 } from "../Actions/ActionTypes"
 import {photosType, usersType} from "../Types/Types";
+import {ActionCreatorsTypes} from "../Actions/ActionCreators";
 
 const initialState = {
     users: [] as Array<usersType>,
@@ -19,7 +20,7 @@ const initialState = {
 }
 
 type initialStateType = typeof initialState
-const PeopleReducer = (state = initialState, action: any): initialStateType => {
+const PeopleReducer = (state = initialState, action: ActionCreatorsTypes): initialStateType => {
     switch (action.type) {
         case followToggle: {
             return {

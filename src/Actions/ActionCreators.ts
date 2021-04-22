@@ -178,5 +178,11 @@ type captchaACType = {
     type: typeof captcha
     captchaUrl: string
 }
+export type ActionCreatorsTypes = captchaACType | updatePhotoACType | DeletePostACType |
+    initializeType | logoutACType | setStatusACType | FollowLoadingACType | authorizingACType |
+    onLoadProfileType | onLoadActionCreatorType | pageChangerActionCreatorType |
+    totalCountActionCreatorType | loadMoreActionCreatorType | followToggleActionCreatorType |
+    changeValueActionCreatorType | addPostActionCreatorType | sendMessageActionCreatorType |
+    changeMessageValueActionCreatorType
 
 

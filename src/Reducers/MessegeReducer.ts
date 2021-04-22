@@ -1,4 +1,5 @@
 import {sendMessage} from '../Actions/ActionTypes'
+import {ActionCreatorsTypes} from "../Actions/ActionCreators";
 
 const initialState = {
     inputValue: '' as string,
@@ -6,7 +7,7 @@ const initialState = {
     messeges: ['Hi', 'Hi', 'Whats up', 'Nothing'] as Array<string>
 }
 type initialStateType = typeof initialState
-const messegePageReducer = (state = initialState, action: any): initialStateType => {
+const messegePageReducer = (state = initialState, action: ActionCreatorsTypes): initialStateType => {
     switch (action.type) {
         case sendMessage: {
             return {
